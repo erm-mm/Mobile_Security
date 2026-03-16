@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vulnerableapp.myapplication"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Точка входа приложения и настройки -->
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+
+        <!-- Главная Activity (по умолчанию) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Уязвимая Activity для лабораторной -->
+        <activity
+            android:name=".AdminPanelActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.vulnerableapp.OPEN_ADMIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!-- Уязвимый Broadcast Receiver -->
+        <receiver
+            android:name=".ResetReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.vulnerableapp.RESET_ACCOUNT"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Уязвимый Content Provider -->
+        <provider
+            android:name=".VulnContentProvider"
+            android:authorities="com.vulnerableapp.provider"
+            android:exported="false"/>
+
+    </application>
+
+</manifest>
